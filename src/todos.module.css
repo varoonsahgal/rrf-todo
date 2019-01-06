@@ -1,0 +1,9 @@
+.addTodos {
+  background-color: red;
+}
+
+.wrapper {
+  width: 60rem;
+  margin: 0 auto;
+  position: relative;
+}

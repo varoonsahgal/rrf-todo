@@ -1,9 +1,7 @@
 import React from 'react';
 
 const Title = (props) => (
-  <div className="row">
-    <h2>Todo, or not Todo</h2>
-  </div>
+  <h2>Todo, or not Todo</h2>
 );
 
 export default Title;

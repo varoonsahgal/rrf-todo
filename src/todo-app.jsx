@@ -1,44 +1,38 @@
-import React, { Component } from 'react';
+import React, {useState } from 'react';
 import Title from './title';
 import AddTodo from './add-todo';
 import TodoList from './todo-list';
 import styles from './todos.module.css'
 
-export default class TodoApp extends Component {
-  constructor(props) {
-    super(props);
+const TodoApp = () => {
 
-    this.state = {
-      todos: [
-        { text: " This is a simple todo list app written in React!", id: 1 },
-        { text: "Hover over todos and click on the `XX` to delete them!", id: 2 },
-        { text: "Add new todos if you like!", id: 3 }
-      ]
-    };
+    const [todoState, setTodoState] = useState(
+        [
+          { text: " This is a simple todo list app written in React!", id: 1 },
+          { text: "Hover over todos and click on the `XX` to delete them!", id: 2 },
+          { text: "Add new todos if you like!", id: 3 }
+        ]
+      );
 
-    this.addTodo = this.addTodo.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
+  function addTodo(todo) {
+
+    setTodoState([...todoState, todo]);
+
   }
 
-  addTodo(todo) {
-    this.setState({
-      todos: [...this.state.todos, todo]
-    });
-  }
+  function removeTodo(id) {
 
-  removeTodo(id) {
-    this.setState({
-      todos: this.state.todos.filter(todo => todo.id !== id)
-    });
-  }
+    setTodoState(todoState.filter(todo => todo.id !== id));
 
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <Title />
-        <AddTodo handleAdd={this.addTodo} />
-        <TodoList todos={this.state.todos} handleRemove={this.removeTodo} />
-      </div>
-    );
-  }
+    }
+
+  return (
+        <div className={styles.wrapper}>
+          <Title />
+          <AddTodo handleAdd={addTodo} />
+          <TodoList todos={todoState} handleRemove={removeTodo} />
+        </div>
+      );
 }
+
+export default TodoApp;

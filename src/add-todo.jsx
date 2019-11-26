@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from './actions'
 
 const AddTodo = ({ handleAdd }) => {
   const [todoText, setTodoText] = useState('')
@@ -11,8 +13,7 @@ const AddTodo = ({ handleAdd }) => {
     e.preventDefault()
     let text = todoText.trim()
     if (!text) return
-    const newTodo = { id: Date.now(), text: text }
-    handleAdd(newTodo)
+    handleAdd(text)
     setTodoText('')
   }
 
@@ -30,4 +31,8 @@ const AddTodo = ({ handleAdd }) => {
   )
 }
 
-export default AddTodo
+const mapDispatchToProps = (dispatch) => ({
+  handleAdd: text => dispatch(addTodo(text)),
+})
+
+export default connect(null, mapDispatchToProps)(AddTodo)

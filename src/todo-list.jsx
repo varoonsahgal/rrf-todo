@@ -1,5 +1,7 @@
-import React from 'react';
-import Todo from './todo.jsx';
+import React from 'react'
+import { connect } from 'react-redux'
+import Todo from './todo.jsx'
+import { removeTodo } from './actions'
 
 const TodoList = ({ todos, handleRemove }) => (
   <div>
@@ -14,4 +16,12 @@ const TodoList = ({ todos, handleRemove }) => (
   </div>
 )
 
-export default TodoList
+const mapStateToProps = (state) => ({
+  todos: state,
+})
+
+const mapDispatch = (dispatch) => ({
+  handleRemove: id => dispatch(removeTodo(id)),
+})
+
+export default connect(mapStateToProps, mapDispatch)(TodoList)

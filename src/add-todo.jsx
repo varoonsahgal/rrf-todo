@@ -1,49 +1,33 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 
-class AddTodo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todoText: ''
-    };
+const AddTodo = ({ handleAdd }) => {
+  const [todoText, setTodoText] = useState('')
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  const handleChange = (event) => {
+    setTodoText(event.target.value)
   }
 
-  handleChange(event) {
-    this.setState({
-      todoText: event.target.value
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    let text = todoText.trim()
+    if (!text) return
+    const newTodo = { id: Date.now(), text: text }
+    handleAdd(newTodo)
+    setTodoText('')
   }
 
-  handleSubmit() {
-    if (!this.state.todoText.trim()) return;
-    const newTodo = {
-      text: this.state.todoText.trim(),
-      id: new Date().getTime()
-    };
-    this.props.handleAdd(newTodo);
-    this.setState({
-      todoText: ''
-    })
-  }
-
-  render() {
-    return (
-      <div className="row">
-        <input
-          type="text"
-          value={this.state.todoText}
-          placeholder="Add todos here..."
-          autoComplete="off"
-          onChange={this.handleChange}
-          className="column column-60"
-        />
-        <button className="button button-outline column column-10" onClick={this.handleSubmit}> + </button>
-      </div>
-    );
-  }
+  return (
+    <form onSubmit={handleSubmit} className="row">
+      <input
+        type="text"
+        value={todoText}
+        placeholder="Add todos here..."
+        autoComplete="off"
+        onChange={handleChange}
+      />
+      <button type="submit"> +</button>
+    </form>
+  )
 }
 
-export default AddTodo;
+export default AddTodo

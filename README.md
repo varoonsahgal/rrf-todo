@@ -1,3 +1,5 @@
+This is a reference implementation for lab 1 from the React and Redux Fundamentals class
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

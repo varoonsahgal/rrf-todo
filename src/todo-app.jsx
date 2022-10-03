@@ -8,7 +8,7 @@ const TodoApp = () => {
 
   const [todoState, setTodoState] = useState(
     [
-      { id: 1, text: 'This is a simple todo list app written in React!' },
+      { id: 1, text: 'This is a simple todo list app written in React and Redux!' },
       { id: 2, text: 'Hover over todos and click on the `XX` to delete them!' },
       { id: 3, text: 'Add new todos if you like!' },
     ],

@@ -2,16 +2,30 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TodoApp from './todo-app'
 import 'milligram'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { todos } from './reducer'
+import { receiveTodos } from './actions'
 
-const initialTodos = [
-  { id: 1, text: 'use redux in todo app' },
-  { id: 2, text: 'complete bonus milestone' },
-]
+import axios from 'axios'
 
-const store = createStore(todos, initialTodos)
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+
+window.axios = axios
+
+const store = createStore(todos, applyMiddleware(thunk))
+
+//const store = createStore(todos)
+
+
+//here we have direct access to dispatch, why?
+//because we are dealing with Redux store object itself
+
+//the change we have made here is we are now using our reducer
+//to load the initial todos INSTEAD of direclty updating the intial todos in
+//the createStore function...
+
+//store.dispatch(receiveTodos(initialTodos))
 
 ReactDOM.render(
   <Provider store={store}>

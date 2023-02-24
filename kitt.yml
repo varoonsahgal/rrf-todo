@@ -1,0 +1,5 @@
+# details of how my application gets deployed to k8s here
+
+
+
+clusterid: [us-west-2, us-east-1]
